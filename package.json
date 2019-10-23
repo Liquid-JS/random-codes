@@ -1,0 +1,41 @@
+{
+    "name": "@liquid-js/random-codes",
+    "version": "1.1.0",
+    "description": "",
+    "main": "dist/index.js",
+    "scripts": {
+        "start": "node ./dist/index.js",
+        "start:dev": "ts-node-dev --no-notify ./src/index.ts",
+        "build": "tsc -p tsconfig.production.json",
+        "lint": "tslint --fix --project .",
+        "prepublish": "npm run build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Liquid-JS/random-codes.git"
+    },
+    "bin": {
+        "random-codes": "dist/index.js"
+    },
+    "files": [
+        "dist"
+    ],
+    "author": "Liquid JS",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/Liquid-JS/random-codes/issues"
+    },
+    "homepage": "https://github.com/Liquid-JS/random-codes#readme",
+    "devDependencies": {
+        "@types/node": "^12.11.5",
+        "@types/yargs": "^13.0.3",
+        "ts-node": "^8.4.1",
+        "ts-node-dev": "^1.0.0-pre.43",
+        "tslint": "^5.20.0",
+        "typescript": "^3.6.4"
+    },
+    "dependencies": {
+        "base32.js": "^0.1.0",
+        "yargs": "^14.2.0"
+    }
+}
