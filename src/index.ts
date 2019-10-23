@@ -17,7 +17,7 @@ yargs
             .help(),
         (args) => {
 
-            const CHARS = '0123456789ACDEFGHJKLMNPQRTUVWXYZ'
+            const CHARS = args.charset
             const BITS = Math.ceil(Math.log2(CHARS.length))
             const N = args.count
             const CODE_LENGTH = args.length
