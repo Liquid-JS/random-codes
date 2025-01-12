@@ -23,23 +23,28 @@ export function generator(args: {
     count: number
 }) {
     const { length, count } = args
+
+    if (count < 1)
+        return []
+
+    if (length < 1)
+        return new Array(count).fill('')
+
     // Remove duplicates
     const charset = Array.from(new Set(args.charset || DEFAULT_CHARSET)).join('')
+
+    const possible = BigInt(charset.length) ** BigInt(length)
+    const max = possible / BigInt(30)
+    if (max < BigInt(count)) {
+        throw new Error(`For given charset and code lenght you can generate up to ${max.toString(10)} codes; to generate more codes, increase code length or include other characters in the charset`)
+    }
 
     const bits = Math.log2(charset.length) * length
     const bytes = Math.ceil(bits / 8)
 
-    const possible = BigInt(charset.length) ** BigInt(length)
-
-    const k = BigInt(30)
-    if ((possible / BigInt(count)) < k) {
-        const max = possible / k
-        throw new Error(`For given charset and code lenght you can generate up to ${max.toString(10)} codes; to generate more codes, increase code length or include other characters in the charset.`)
-    }
-
     /**
      * Upper limit, avoiding modulo bias:
-     * 
+     *
      * - upper % possible === 0
      * - upper <= 2 ^ (bytes * 8)
      */

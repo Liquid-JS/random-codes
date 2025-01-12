@@ -45,6 +45,7 @@ await Promise.resolve(
                     console.log(codes)
                 }
             })
+        .demandCommand()
         .showHelpOnFail(false)
         .strict()
         .help()
