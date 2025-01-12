@@ -1,6 +1,6 @@
 {
     "name": "@liquid-js/random-codes",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "Generate random codes using Node's crypto library",
     "type": "module",
     "main": "./lib/index.js",
