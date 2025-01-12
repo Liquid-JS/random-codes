@@ -1,7 +1,7 @@
 {
     "extends": "./tsconfig.json",
     "files": [
-        "./src/index.ts",
-        "./src/cli.ts"
+        "./src/cli.ts",
+        "./src/index.ts"
     ]
 }
