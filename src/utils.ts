@@ -29,9 +29,8 @@ export function generator(args: {
     return new Array(count).fill(0).map(_el => {
         let code: string
         do {
-            const buff = randomBytes(Math.ceil((length + 2) * bits / 8))
-            code = encode(buff, charset, length + 2)
-                .substring(1, length + 1) // First and last character might be biased
+            const buff = randomBytes(Math.ceil((length + 1) * bits / 8))
+            code = encode(buff, charset, length)
         } while (generated.has(code))
         generated.add(code)
         return code
