@@ -22,16 +22,39 @@ export function generator(args: {
      */
     count: number
 }) {
-    const { charset = DEFAULT_CHARSET, length, count } = args
-    const bits = Math.ceil(Math.log2(charset.length))
+    const { length, count } = args
+    // Remove duplicates
+    const charset = Array.from(new Set(args.charset || DEFAULT_CHARSET)).join('')
+
+    const bits = Math.log2(charset.length) * length
+    const bytes = Math.ceil(bits / 8)
+
+    const possible = BigInt(charset.length) ** BigInt(length)
+
+    const k = BigInt(30)
+    if ((possible / BigInt(count)) < k) {
+        const max = possible / k
+        throw new Error(`For given charset and code lenght you can generate up to ${max.toString(10)} codes; to generate more codes, increase code length or include other characters in the charset.`)
+    }
+
+    /**
+     * Upper limit, avoiding modulo bias:
+     * 
+     * - upper % possible === 0
+     * - upper <= 2 ^ (bytes * 8)
+     */
+    const multiplier = Math.floor(2 ** (bytes * 8 - bits))
+    const upper = possible * BigInt(multiplier)
 
     const generated = new Set<string>()
     return new Array(count).fill(0).map(_el => {
-        let code: string
+        let code: string | undefined
         do {
-            const buff = randomBytes(Math.ceil((length + 1) * bits / 8))
-            code = encode(buff, charset, length)
-        } while (generated.has(code))
+            const buff = randomBytes(bytes)
+            const val = BigInt('0x' + buff.toString('hex'))
+            if (val < upper)
+                code = encode(buff, charset, length)
+        } while (!code || generated.has(code))
         generated.add(code)
         return code
     })
