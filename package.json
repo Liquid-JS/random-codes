@@ -15,9 +15,7 @@
             "default": "./lib/index.js"
         }
     },
-    "bin": {
-        "random-codes": "lib/cli.js"
-    },
+    "bin": "lib/cli.js",
     "files": [
         "lib"
     ],
