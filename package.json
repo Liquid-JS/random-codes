@@ -1,41 +1,79 @@
 {
     "name": "@liquid-js/random-codes",
     "version": "1.1.2",
-    "description": "",
-    "main": "dist/index.js",
+    "description": "Generate random codes using Node's crypto library",
+    "type": "module",
+    "main": "./lib/index.js",
+    "types": "./lib/index.d.ts",
+    "exports": {
+        "./package.json": {
+            "default": "./package.json"
+        },
+        ".": {
+            "node": "./lib/index.js",
+            "types": "./lib/index.d.ts",
+            "default": "./lib/index.js"
+        }
+    },
+    "bin": {
+        "random-codes": "lib/cli.js"
+    },
+    "files": [
+        "lib"
+    ],
+    "dependencies": {
+        "yargs": "^17.7.2"
+    },
+    "devDependencies": {
+        "@stylistic/eslint-plugin": "^2.12.1",
+        "@types/node": "<23.0.0",
+        "@types/yargs": "^17.0.33",
+        "clean-package": "^2.2.0",
+        "commit-and-tag-version": "^12.5.0",
+        "eslint": "^9.18.0",
+        "eslint-plugin-import": "^2.31.0",
+        "eslint-plugin-jsdoc": "^50.6.1",
+        "eslint-plugin-prefer-arrow-functions": "^3.6.0",
+        "eslint-plugin-unused-imports": "^4.1.4",
+        "npm-check-updates": "^17.1.13",
+        "rimraf": "^6.0.1",
+        "typedoc": "^0.27.6",
+        "typescript": "^5.7.3",
+        "typescript-eslint": "^8.19.1"
+    },
     "scripts": {
-        "start": "node ./dist/index.js",
-        "start:dev": "ts-node-dev --no-notify ./src/index.ts",
-        "build": "tsc -p tsconfig.production.json",
-        "lint": "tslint --fix --project .",
-        "prepare": "npm run build"
+        "build": "rimraf lib && tsc -p tsconfig.lib.json",
+        "lint": "eslint . --fix",
+        "prepublishOnly": "npm run build",
+        "prepare": "husky",
+        "release": "git diff --exit-code && commit-and-tag-version && git push --follow-tags origin",
+        "docs": "typedoc",
+        "prepack": "clean-package",
+        "postpack": "clean-package restore"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Liquid-JS/random-codes.git"
     },
-    "bin": {
-        "random-codes": "dist/index.js"
-    },
-    "files": [
-        "dist"
+    "keywords": [
+        "random",
+        "codes",
+        "generator",
+        "crypto"
     ],
-    "author": "Liquid JS",
+    "author": "HitkoDev <development@hitko.si>",
     "license": "GPL-3.0",
     "bugs": {
         "url": "https://github.com/Liquid-JS/random-codes/issues"
     },
-    "homepage": "https://github.com/Liquid-JS/random-codes#readme",
-    "devDependencies": {
-        "@types/node": "^12.11.5",
-        "@types/yargs": "^13.0.3",
-        "ts-node": "^8.4.1",
-        "ts-node-dev": "^1.0.0-pre.43",
-        "tslint": "^5.20.0",
-        "typescript": "^3.6.4"
-    },
-    "dependencies": {
-        "base32.js": "^0.1.0",
-        "yargs": "^14.2.0"
+    "homepage": "https://liquid-js.github.io/random-codes/",
+    "packageManager": "yarn@4.6.0",
+    "clean-package": {
+        "remove": [
+            "packageManager",
+            "scripts",
+            "devDependencies",
+            "clean-package"
+        ]
     }
 }
