@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.2.4](https://github.com/Liquid-JS/random-codes/compare/v1.2.3...v1.2.4) (2026-01-20)
+
+
+### Bug Fixes
+
+* include checks ([8aa32f0](https://github.com/Liquid-JS/random-codes/commit/8aa32f0fa0332459a4ab2c4f5e41aea23a12aba0))
+
 ## [1.2.3](https://github.com/Liquid-JS/random-codes/compare/v1.2.2...v1.2.3) (2025-01-12)
 
 
